@@ -34,16 +34,26 @@ def register(request):
         if password == password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request,'username taken')
+                return redirect('register')
             elif User.objects.filter(email=email).exists():
                 messages.info(request,'email taken')   
+                return redirect('register')
             else:    
                 user= User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name)
                 user.save();
-                print("created")
+                return redirect('login')
+            
             
         else:
             messages.info(request,'password not matching') 
-            return redirect('/')  
+            return redirect('register')  
+        return redirect('/')    
         
     else:    
       return render(request,'register.html')
+
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')

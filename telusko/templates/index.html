@@ -14,9 +14,9 @@
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="index.html">Home</a></li>
 									<li><a href="contact.html">Contact</a></li>
-							        {% if user.authenticated %}
+							        {% if user.is_authenticated %}
 									<li>hello , {{user.first_name}}</li>
-									<li><a href="account/logout">Register</a></li>
+									<li><a href="account/logout">Logout</a></li>
 									{% else %}
 									<li><a href="account/login">Login</a></li>
 									<li><a href="account/register">Register</a></li>
@@ -61,7 +61,7 @@
 				<li><a href="about.html">About us</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="news.html">News</a></li>
-				<li><a href="contact.html">Contact</a></li>
+				<li><a href="">Contact</a></li>
 			</ul>
 		</div>
 		<div class="menu_social">
@@ -194,7 +194,7 @@
 							<!-- Intro Item -->
 							<div class="col-lg-4 intro_col">
 								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-									<div class="intro_icon"><img src='{% static "images/wallet.svg" %}' alt=""></div>
+									<div class="intro_icon"><img src='{% static "images/wallet.svg" %}' alt="" ></div>
 									<div class="intro_content">
 										<div class="intro_title">The Best Prices</div>
 										<div class="intro_subtitle"><p>Sollicitudin mauris lobortis in.</p></div>
@@ -247,6 +247,13 @@
 								<div class="destination_title"><a href="destinations.html">{{dest.name}}</a></div>
 								<div class="destination_subtitle"><p>{{dest.desc}}</p></div>
 								<div class="destination_price">From ${{dest.price}}</div>
+								<div >
+									{% if user.is_authenticated %}
+								<div class="spec_offer text-center"><a href="{% url 'book' %}">Book My Trip</a></div>
+									{% else %}
+									<div class="spec_offer text-center"><a href="{% url 'login' %}">Book My Trip</a></div>
+									{% endif %}
+							</div>
 							</div>
 						</div>
                         {% endfor %}

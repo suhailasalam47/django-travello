@@ -6,3 +6,7 @@ from travello.models import destination
 def index(request):
     dests = destination.objects.all()
     return render(request, 'index.html',{'d':dests})
+
+
+def book(request):
+    return render(request, "book.html")
